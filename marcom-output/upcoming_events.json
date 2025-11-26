@@ -1,0 +1,51 @@
+[
+  {
+    "date": "2025-11-14",
+    "name": "Children's Day",
+    "tags": [
+      "festive",
+      "student"
+    ],
+    "days_until": 0,
+    "urgency": "high"
+  },
+  {
+    "date": "2025-11-15",
+    "name": "Jharkhand Foundation Day",
+    "tags": [
+      "state",
+      "regional"
+    ],
+    "days_until": 1,
+    "urgency": "high"
+  },
+  {
+    "date": "2025-12-01",
+    "name": "World AIDS Day",
+    "tags": [
+      "awareness"
+    ],
+    "days_until": 17,
+    "urgency": "medium"
+  },
+  {
+    "date": "2025-12-01",
+    "name": "SSC CGL Exam Season",
+    "tags": [
+      "exam",
+      "ssc"
+    ],
+    "days_until": 17,
+    "urgency": "medium"
+  },
+  {
+    "date": "2025-12-25",
+    "name": "Christmas",
+    "tags": [
+      "festive",
+      "holiday"
+    ],
+    "days_until": 41,
+    "urgency": "low"
+  }
+]

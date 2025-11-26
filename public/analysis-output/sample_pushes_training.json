@@ -1,0 +1,322 @@
+{
+  "categories": {
+    "fomo": {
+      "count": 2,
+      "examples": [
+        {
+          "hook": "No More Exam Fear😇😇",
+          "body": "when Adda247 is here 🤩🤩 ⏰Less Than 4 Days Left for Exam ✔️Enrol in IBPS RRB PO Test Series ✔️At the lowest price of Rs.149/- ✔️Use Code:JOB15",
+          "cta": "Be Revision Ready!!",
+          "full_message": "No More Exam Fear😇😇\n\nwhen Adda247 is here 🤩🤩 ⏰Less Than 4 Days Left for Exam ✔️Enrol in IBPS RRB PO Test Series ✔️At the lowest price of Rs.149/- ✔️Use Code:JOB15\n\nBe Revision Ready!!"
+        },
+        {
+          "hook": "Delay : Not Allowed 🚫",
+          "body": "Price Hike Alert ⏰ Join the - UGC NET Home Science MegaPack before it's too late !",
+          "cta": "Offer Ending Soon.. 💣",
+          "full_message": "Delay : Not Allowed 🚫\n\nPrice Hike Alert ⏰ Join the - UGC NET Home Science MegaPack before it's too late !\n\nOffer Ending Soon.. 💣"
+        }
+      ],
+      "common_hooks": [
+        "No More Exam Fear😇😇",
+        "Delay : Not Allowed 🚫"
+      ],
+      "common_ctas": [
+        "Be Revision Ready!!",
+        "Offer Ending Soon.. 💣"
+      ],
+      "structure_patterns": {
+        "avg_hook_length": 20.0,
+        "avg_body_length": 111.5,
+        "uses_emojis": 1.0,
+        "uses_bullets": 0.5
+      }
+    },
+    "serious": {
+      "count": 2,
+      "examples": [
+        {
+          "hook": "IBPS SO AFO Notification Out !!!",
+          "body": "✅Bag Complete New Prepration Batch ✅Test Series & Ebooks for Concept Clarity ✅500 Vacancies Available ✅Join Now & Get Flat 75% Off",
+          "cta": "Tap for the Code👇",
+          "full_message": "IBPS SO AFO Notification Out !!!\n\n✅Bag Complete New Prepration Batch ✅Test Series & Ebooks for Concept Clarity ✅500 Vacancies Available ✅Join Now & Get Flat 75% Off\n\nTap for the Code👇"
+        },
+        {
+          "hook": "Decode Your Data Success 🔍",
+          "body": "Enrol in Data Analytics Essential Course ▶︎Better Career Growth Path 🚀 ▶︎Flexible Learning System🕒 ▶︎Certification Included ▶︎Grab flat 75% off | Use Code:AUG75",
+          "cta": "Enrol Now!!!",
+          "full_message": "Decode Your Data Success 🔍\n\nEnrol in Data Analytics Essential Course ▶︎Better Career Growth Path 🚀 ▶︎Flexible Learning System🕒 ▶︎Certification Included ▶︎Grab flat 75% off | Use Code:AUG75\n\nEnrol Now!!!"
+        }
+      ],
+      "common_hooks": [
+        "IBPS SO AFO Notification Out !!!",
+        "Decode Your Data Success 🔍"
+      ],
+      "common_ctas": [
+        "Tap for the Code👇",
+        "Enrol Now!!!"
+      ],
+      "structure_patterns": {
+        "avg_hook_length": 29.0,
+        "avg_body_length": 145.0,
+        "uses_emojis": 1.0,
+        "uses_bullets": 0.5
+      }
+    },
+    "celebratory": {
+      "count": 2,
+      "examples": [
+        {
+          "hook": "We Have 4 Good News for you!🥳",
+          "body": "▶︎JAIIB Registration Started ▶︎JAIIB Mahapack 2.0 is here ▶︎At Flat 80% Off ▶︎With Double Validity!!",
+          "cta": "Code: JC80",
+          "full_message": "We Have 4 Good News for you!🥳\n\n▶︎JAIIB Registration Started ▶︎JAIIB Mahapack 2.0 is here ▶︎At Flat 80% Off ▶︎With Double Validity!!\n\nCode: JC80"
+        },
+        {
+          "hook": "Shubho Pujo! Mega Discount Ase! 🙏🏻🛑 🌸",
+          "body": "👉Get SSC Supreme Complete Prep Pack 👉Enroll at just Rs.3499 with Double Validity 👉6 books with printable notes included 👉Perfect if aiming for top govt posts",
+          "cta": "Offer Ending Soon!!",
+          "full_message": "Shubho Pujo! Mega Discount Ase! 🙏🏻🛑 🌸\n\n👉Get SSC Supreme Complete Prep Pack 👉Enroll at just Rs.3499 with Double Validity 👉6 books with printable notes included 👉Perfect if aiming for top govt posts\n\nOffer Ending Soon!!"
+        }
+      ],
+      "common_hooks": [
+        "We Have 4 Good News for you!🥳",
+        "Shubho Pujo! Mega Discount Ase! 🙏🏻🛑 🌸"
+      ],
+      "common_ctas": [
+        "Code: JC80",
+        "Offer Ending Soon!!"
+      ],
+      "structure_patterns": {
+        "avg_hook_length": 33.0,
+        "avg_body_length": 128.5,
+        "uses_emojis": 1.0,
+        "uses_bullets": 1.0
+      }
+    },
+    "friendly": {
+      "count": 3,
+      "examples": [
+        {
+          "hook": "3 Reasons to open this link 🔔",
+          "body": "▶︎CAIIB Exam Coming Soon ▶︎CAIIB Mahapack 2.0 is here ▶︎At Flat 80% Off ▶︎With Double Validity!!",
+          "cta": "Code: JC80",
+          "full_message": "3 Reasons to open this link 🔔\n\n▶︎CAIIB Exam Coming Soon ▶︎CAIIB Mahapack 2.0 is here ▶︎At Flat 80% Off ▶︎With Double Validity!!\n\nCode: JC80"
+        },
+        {
+          "hook": "(Student Name) Good News Pata Chali??",
+          "body": "Nooo??? Click To Know🤩",
+          "cta": "Hurrryyyy🏃‍♀️🏃‍♀️",
+          "full_message": "(Student Name) Good News Pata Chali??\n\nNooo??? Click To Know🤩\n\nHurrryyyy🏃‍♀️🏃‍♀️"
+        },
+        {
+          "hook": "🏆 Crack All Bank Exams Together",
+          "body": "• All Bank Pre + Mains covered • Unlimited Live & Recorded Classes • 500+ Mock Tests Included • Free Interview Prep",
+          "cta": "👉 Enroll Now",
+          "full_message": "🏆 Crack All Bank Exams Together\n\n• All Bank Pre + Mains covered • Unlimited Live & Recorded Classes • 500+ Mock Tests Included • Free Interview Prep\n\n👉 Enroll Now"
+        }
+      ],
+      "common_hooks": [
+        "3 Reasons to open this link 🔔",
+        "(Student Name) Good News Pata Chali??",
+        "🏆 Crack All Bank Exams Together"
+      ],
+      "common_ctas": [
+        "Code: JC80",
+        "Hurrryyyy🏃‍♀️🏃‍♀️",
+        "👉 Enroll Now"
+      ],
+      "structure_patterns": {
+        "avg_hook_length": 32.333333333333336,
+        "avg_body_length": 77.66666666666667,
+        "uses_emojis": 1.0,
+        "uses_bullets": 0.3333333333333333
+      }
+    },
+    "General": {
+      "count": 28,
+      "examples": [
+        {
+          "hook": "PYPs available for RBI Grade B!!",
+          "body": "Give your best attempt in the Exam ▸Join the online test series for your revision ▸330+ practice test papers with the latest trend ▸Detailed solutions!! ▸Available for just Rs.425/-",
+          "cta": "Avail Now!!",
+          "full_message": "PYPs available for RBI Grade B!!\n\nGive your best attempt in the Exam ▸Join the online test series for your revision ▸330+ practice test papers with the latest trend ▸Detailed solutions!! ▸Available for just Rs.425/-\n\nAvail Now!!"
+        },
+        {
+          "hook": "(Student Name) Congratulations🤩",
+          "body": "New UPSC IAS (Pre+Mains) Evening Batch Launched!!",
+          "cta": "Start Your Selection Journey!!",
+          "full_message": "(Student Name) Congratulations🤩\n\nNew UPSC IAS (Pre+Mains) Evening Batch Launched!!\n\nStart Your Selection Journey!!"
+        },
+        {
+          "hook": "Special Offer Only For You🤗🤗",
+          "body": "Now, You Can Join UPSC IAS Live Batch at Just Rs.18,999/- Offer Valid Only For Today. Use Code: TODAY.",
+          "cta": "Valid Only For Today. Hurry!!",
+          "full_message": "Special Offer Only For You🤗🤗\n\nNow, You Can Join UPSC IAS Live Batch at Just Rs.18,999/- Offer Valid Only For Today. Use Code: TODAY.\n\nValid Only For Today. Hurry!!"
+        },
+        {
+          "hook": "~10,00,000 Applicants!",
+          "body": "800 Selections. Become One Of The Them With StudyIQ.",
+          "cta": "Dream IAS😎",
+          "full_message": "~10,00,000 Applicants!\n\n800 Selections. Become One Of The Them With StudyIQ.\n\nDream IAS😎"
+        },
+        {
+          "hook": "Anything Else You Need??",
+          "body": "👉UPSC IAS Foundation Live Batch ✔✔✔900+ Hrs Of Live Classes ✔✔✔Recorded Videos ✔✔✔Ready to Learn Notes & PPTs' ✔✔✔Mentorship",
+          "cta": "Limited Seats, Join Now!!",
+          "full_message": "Anything Else You Need??\n\n👉UPSC IAS Foundation Live Batch ✔✔✔900+ Hrs Of Live Classes ✔✔✔Recorded Videos ✔✔✔Ready to Learn Notes & PPTs' ✔✔✔Mentorship\n\nLimited Seats, Join Now!!"
+        },
+        {
+          "hook": "CAP📰📰",
+          "body": "It's a Daily Current Affiars Programme Designed By Experts. Join UPSC IAS (Pre+Mains) Live Batch and Unlock More Features To Strengthen Your Prep.",
+          "cta": "Batch starting Soon, Join ASAP!!",
+          "full_message": "CAP📰📰\n\nIt's a Daily Current Affiars Programme Designed By Experts. Join UPSC IAS (Pre+Mains) Live Batch and Unlock More Features To Strengthen Your Prep.\n\nBatch starting Soon, Join ASAP!!"
+        },
+        {
+          "hook": "(Student Name), Kyuuuuuu??????",
+          "body": "When you are getting UPSC IAS Live Batch And UPSC Video Course in a single pack Fir alag alag kyu lena???",
+          "cta": "Limited Seats, Join Now!!",
+          "full_message": "(Student Name), Kyuuuuuu??????\n\nWhen you are getting UPSC IAS Live Batch And UPSC Video Course in a single pack Fir alag alag kyu lena???\n\nLimited Seats, Join Now!!"
+        },
+        {
+          "hook": "(Student Name) Don't❌❌",
+          "body": "S.K.I.P THIS👇",
+          "cta": "Click Here👇",
+          "full_message": "(Student Name) Don't❌❌\n\nS.K.I.P THIS👇\n\nClick Here👇"
+        },
+        {
+          "hook": "(Student Name), Don't Pay Rs.1,00,000❌❌",
+          "body": "You Can Join UPSC (Pre+Mains) Live Batch at Rs.20,499/- Only And Get Everything For Complete Prep.",
+          "cta": "Use Code: LIVE.",
+          "full_message": "(Student Name), Don't Pay Rs.1,00,000❌❌\n\nYou Can Join UPSC (Pre+Mains) Live Batch at Rs.20,499/- Only And Get Everything For Complete Prep.\n\nUse Code: LIVE."
+        },
+        {
+          "hook": "(Student Name) Jab Koi Baat Bigad Jaye..",
+          "body": "Ya Prep Me Mushkil Aaye, Hum Denge Sath Hamesha🤗🤗",
+          "cta": "Stay Happy☺",
+          "full_message": "(Student Name) Jab Koi Baat Bigad Jaye..\n\nYa Prep Me Mushkil Aaye, Hum Denge Sath Hamesha🤗🤗\n\nStay Happy☺"
+        },
+        {
+          "hook": "(Student Name) UPSC???",
+          "body": "Start Prep With StudyIQ▶Prelims▶Mains▶Interview▶Selection😎🏆",
+          "cta": "Start Today!!",
+          "full_message": "(Student Name) UPSC???\n\nStart Prep With StudyIQ▶Prelims▶Mains▶Interview▶Selection😎🏆\n\nStart Today!!"
+        },
+        {
+          "hook": "Exclusive: UPSC Optional Mains!!",
+          "body": "👉Choose Your Fav Optional subject 👉Boost Your Score in Mains 👉Live Classes + Recorded Videos 👉Previous Year Questions 👉At Rs.13,999/- Only | Use Code: LIVE",
+          "cta": "Limited Seats, Join Fast!!",
+          "full_message": "Exclusive: UPSC Optional Mains!!\n\n👉Choose Your Fav Optional subject 👉Boost Your Score in Mains 👉Live Classes + Recorded Videos 👉Previous Year Questions 👉At Rs.13,999/- Only | Use Code: LIVE\n\nLimited Seats, Join Fast!!"
+        },
+        {
+          "hook": "To-Do Today✔✔",
+          "body": "👉Click On The Link 👉Select The Live Batch 👉Apply Code: LIVE 👉Check out with Huge Discount 👉Start UPSC IAS (Pre+Mains) Prep With Experts",
+          "cta": "Limited Seats, Hurry Up🏃‍♀️",
+          "full_message": "To-Do Today✔✔\n\n👉Click On The Link 👉Select The Live Batch 👉Apply Code: LIVE 👉Check out with Huge Discount 👉Start UPSC IAS (Pre+Mains) Prep With Experts\n\nLimited Seats, Hurry Up🏃‍♀️"
+        },
+        {
+          "hook": "1..2...3...4...5...6...7....8.....",
+          "body": "...9...10...We're Still Counting The Benefits Of UPSC IAS(Pre+Mains) Batch. Final Number Will Tell You Soon....11...12...13...14..",
+          "cta": "Till Then You Join The Batch👇",
+          "full_message": "1..2...3...4...5...6...7....8.....\n\n...9...10...We're Still Counting The Benefits Of UPSC IAS(Pre+Mains) Batch. Final Number Will Tell You Soon....11...12...13...14..\n\nTill Then You Join The Batch👇"
+        },
+        {
+          "hook": "Congrats (User Name)",
+          "body": "You Are Eligible To Get This Special Offer!!",
+          "cta": "Grab Now!!",
+          "full_message": "Congrats (User Name)\n\nYou Are Eligible To Get This Special Offer!!\n\nGrab Now!!"
+        },
+        {
+          "hook": "Sssshhhhh....🤫🤫🤫",
+          "body": "It's 30th Sep.",
+          "cta": "Click To Know More👇",
+          "full_message": "Sssshhhhh....🤫🤫🤫\n\nIt's 30th Sep.\n\nClick To Know More👇"
+        },
+        {
+          "hook": "Check List For UPSC IAS Prep!!",
+          "body": "👉Live Classes ✔✔✔ 👉Recorded Videos✔✔✔ 👉Mocks✔✔✔ 👉Mentorship✔✔✔ 👉Hand-written and e-Notes ✔✔✔ 👉Huge Discount✔✔✔",
+          "cta": "Join the Live Batch Today✌",
+          "full_message": "Check List For UPSC IAS Prep!!\n\n👉Live Classes ✔✔✔ 👉Recorded Videos✔✔✔ 👉Mocks✔✔✔ 👉Mentorship✔✔✔ 👉Hand-written and e-Notes ✔✔✔ 👉Huge Discount✔✔✔\n\nJoin the Live Batch Today✌"
+        },
+        {
+          "hook": "New Shortcuts & Speed Techniques!!🚄",
+          "body": "👉Unlock with RRB Section Controller Batch 👉Detailed faculty PDFs and exam tips 👉Apply with any degree for 368 vacancies 👉Join at Rs.1999/- Only",
+          "cta": "Batch starting soon, Hurry!!",
+          "full_message": "New Shortcuts & Speed Techniques!!🚄\n\n👉Unlock with RRB Section Controller Batch 👉Detailed faculty PDFs and exam tips 👉Apply with any degree for 368 vacancies 👉Join at Rs.1999/- Only\n\nBatch starting soon, Hurry!!"
+        },
+        {
+          "hook": "9 Exams---1 Stop Solution!😎✅",
+          "body": "👉AP & TG MegaPack –at ₹4599/- 👉Special focus on scoring topics 👉Tips and Tricks to secure more marks 👉Offer valid for limited time",
+          "cta": "Hurry up!!",
+          "full_message": "9 Exams---1 Stop Solution!😎✅\n\n👉AP & TG MegaPack –at ₹4599/- 👉Special focus on scoring topics 👉Tips and Tricks to secure more marks 👉Offer valid for limited time\n\nHurry up!!"
+        },
+        {
+          "hook": "Extremely Urgent: LAST DATE Today!!!",
+          "body": "👉 DHS Assam 2025 Applications Closing 👉 Grab 191 Govt Vacancies this year 👉 Apply before midnight",
+          "cta": "⚡ USE CODE: SEP20",
+          "full_message": "Extremely Urgent: LAST DATE Today!!!\n\n👉 DHS Assam 2025 Applications Closing 👉 Grab 191 Govt Vacancies this year 👉 Apply before midnight\n\n⚡ USE CODE: SEP20"
+        }
+      ],
+      "common_hooks": [
+        "PYPs available for RBI Grade B!!",
+        "(Student Name) Congratulations🤩",
+        "Special Offer Only For You🤗🤗",
+        "~10,00,000 Applicants!",
+        "Anything Else You Need??",
+        "CAP📰📰",
+        "(Student Name), Kyuuuuuu??????",
+        "(Student Name) Don't❌❌",
+        "(Student Name), Don't Pay Rs.1,00,000❌❌",
+        "(Student Name) Jab Koi Baat Bigad Jaye.."
+      ],
+      "common_ctas": [
+        "Avail Now!!",
+        "Start Your Selection Journey!!",
+        "Valid Only For Today. Hurry!!",
+        "Dream IAS😎",
+        "Limited Seats, Join Now!!",
+        "Batch starting Soon, Join ASAP!!",
+        "Limited Seats, Join Now!!",
+        "Click Here👇",
+        "Use Code: LIVE.",
+        "Stay Happy☺"
+      ],
+      "structure_patterns": {
+        "avg_hook_length": 28.464285714285715,
+        "avg_body_length": 104.17857142857143,
+        "uses_emojis": 0.9285714285714286,
+        "uses_bullets": 0.35714285714285715
+      }
+    },
+    "motivational": {
+      "count": 1,
+      "examples": [
+        {
+          "hook": "📩 Open Letter to IRDAI Mains Aspirant 📩",
+          "body": "Exams are challenging but you're a challenger. Wishing you the best to crack the exam 💪",
+          "cta": "Learn or Miss!!",
+          "full_message": "📩 Open Letter to IRDAI Mains Aspirant 📩\n\nExams are challenging but you're a challenger. Wishing you the best to crack the exam 💪\n\nLearn or Miss!!"
+        }
+      ],
+      "common_hooks": [
+        "📩 Open Letter to IRDAI Mains Aspirant 📩"
+      ],
+      "common_ctas": [
+        "Learn or Miss!!"
+      ],
+      "structure_patterns": {
+        "avg_hook_length": 39.0,
+        "avg_body_length": 87.0,
+        "uses_emojis": 1.0,
+        "uses_bullets": 0.0
+      }
+    }
+  },
+  "statistics": {
+    "fomo": 2,
+    "serious": 2,
+    "celebratory": 2,
+    "friendly": 3,
+    "General": 28,
+    "motivational": 1
+  }
+}

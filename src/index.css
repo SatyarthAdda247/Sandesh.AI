@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Light theme - Inspired by stitch_login_onboarding design */
+    --background: 210 20% 98%; /* #F9FAFB - Off-white background */
+    --foreground: 215 25% 15%; /* Dark text */
+
+    --card: 0 0% 100%; /* #FFFFFF - White cards */
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    --primary: 217 91% 60%; /* #3B82F6 - Modern blue */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 215 25% 15%;
+
+    --muted: 210 15% 96%;
+    --muted-foreground: 215 12% 45%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 145 65% 45%; /* Green for positive metrics */
+    --success-foreground: 0 0% 100%;
+
+    --warning: 45 95% 55%;
+    --warning-foreground: 215 25% 15%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 20% 88%; /* #D1D5DB - Light gray border */
+    --input: 215 20% 88%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.5rem; /* 8px - Modern rounded corners */
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 215 25% 20%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 20% 96%;
+    --sidebar-accent-foreground: 215 25% 15%;
+    --sidebar-border: 215 20% 88%;
+    --sidebar-ring: 217 91% 60%;
+
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark {
+    /* Dark theme - Inspired by stitch_login_onboarding design */
+    --background: 210 25% 10%; /* #101922 - Dark background */
+    --foreground: 0 0% 95%; /* Light text */
+
+    --card: 210 28% 15%; /* #182431 - Dark card */
+    --card-foreground: 0 0% 95%;
+
+    --popover: 210 28% 15%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 217 91% 60%; /* #3B82F6 - Same blue for consistency */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 25% 18%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 210 25% 18%;
+    --muted-foreground: 215 15% 65%; /* #92adc9 - Muted text */
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 145 65% 50%; /* #0bda5b - Green for positive */
+    --success-foreground: 0 0% 100%;
+
+    --warning: 45 95% 60%;
+    --warning-foreground: 215 25% 15%;
+
+    --destructive: 0 72% 55%; /* #fa6238 - Red for negative */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 25% 30%; /* #324d67 - Dark border */
+    --input: 210 25% 30%;
+    --ring: 217 91% 60%;
+
+    --sidebar-background: 210 28% 15%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 25% 20%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 210 25% 30%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}

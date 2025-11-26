@@ -1,0 +1,174 @@
+{
+  "totalCampaigns": 2170,
+  "totalRevenue": 0,
+  "verticals": [
+    "Banking",
+    "REGULATORY BODIES",
+    "JAIIB CAIIB",
+    "Engineering",
+    "UGC NET",
+    "PUNJAB STATE EXAMS",
+    "CA FOUNDATION",
+    "CA INTERMEDIATE",
+    "ANDHRA PRADESH",
+    "ODISHA STATE EXAMS",
+    "WEST BENGAL",
+    "NORTH EAST STATE EXAMS",
+    "TAMIL NADU",
+    "CTET",
+    "BIHAR",
+    "SSC",
+    "Agriculture",
+    "Railways",
+    "BANKING",
+    "CSIR",
+    "BIHAR TEACHING",
+    "CUET PG",
+    "LAW",
+    "West Bengal",
+    "PUNJAB",
+    "ENGINEERING",
+    "NURSING",
+    "Teaching",
+    "AGRICULTURE",
+    "RAILWAYS",
+    "WEST BENGAL STATE EXAMS",
+    "TAMIL NADU STATE EXAMS",
+    "CA",
+    "AP & TELANGANA STATE EXAMS",
+    "nursing",
+    "Bihar",
+    "Nursing"
+  ],
+  "campaignPatterns": {
+    "topHooks": [
+      {
+        "hook": "⚠️ Kal Ke Baad Ye Offer Expire Ho Jayega!",
+        "vertical": "REGULATORY BODIES",
+        "score": 0.9583333333333334
+      },
+      {
+        "hook": "🚨🏦 IBPS PO Bumper Bharti Out!",
+        "vertical": "Banking",
+        "score": 0.875
+      },
+      {
+        "hook": "💡 1007 Seats = 1007 Chances!",
+        "vertical": "REGULATORY BODIES",
+        "score": 0.875
+      },
+      {
+        "hook": "Selection Loading... Tap Fast ⏳",
+        "vertical": "Banking",
+        "score": 0.875
+      },
+      {
+        "hook": "🎯 IBPS SO Aspirants, This is Your Shot!",
+        "vertical": "REGULATORY BODIES",
+        "score": 0.875
+      },
+      {
+        "hook": "Bro, Bas 3️⃣ hours baaki hain 😮😮😮",
+        "vertical": "Banking",
+        "score": 0.875
+      },
+      {
+        "hook": "🚨 3️⃣ Hours Left to Make a Smart Move!😮",
+        "vertical": "REGULATORY BODIES",
+        "score": 0.875
+      },
+      {
+        "hook": "IBPS PO & SBI PO❓ Ye Sirf Exams Nahi",
+        "vertical": "Banking",
+        "score": 0.875
+      },
+      {
+        "hook": "✅ Syllabus Sabka Same Hai...",
+        "vertical": "REGULATORY BODIES",
+        "score": 0.875
+      },
+      {
+        "hook": "Aap Honge Kamyaab, Ek Din🎵",
+        "vertical": "Banking",
+        "score": 0.875
+      },
+      {
+        "hook": "4️⃣ Log Kya Kahenge?😮",
+        "vertical": "REGULATORY BODIES",
+        "score": 0.875
+      },
+      {
+        "hook": "🛤️ Lakhon Aspirants, Ek Destination!",
+        "vertical": "Banking",
+        "score": 0.875
+      },
+      {
+        "hook": "🎯 1 Goal. 1 Path. 1 Pack.",
+        "vertical": "Banking",
+        "score": 0.875
+      },
+      {
+        "hook": "⚠️IBPS SO EXAM IS COMING⚠️",
+        "vertical": "REGULATORY BODIES",
+        "score": 0.875
+      },
+      {
+        "hook": "“Bas kal se seriously shuru...”",
+        "vertical": "REGULATORY BODIES",
+        "score": 0.875
+      },
+      {
+        "hook": "¯_(ツ)_/¯ Strategy ka idea hi nahi!",
+        "vertical": "Banking",
+        "score": 0.875
+      },
+      {
+        "hook": "¯_(ツ)_/¯ Strategy ka idea hi nahi!",
+        "vertical": "REGULATORY BODIES",
+        "score": 0.875
+      },
+      {
+        "hook": "Har action ka equal & opposite reaction hota hai.",
+        "vertical": "Banking",
+        "score": 0.875
+      },
+      {
+        "hook": "Toppers ne kuch alag nahi kiya.",
+        "vertical": "REGULATORY BODIES",
+        "score": 0.875
+      },
+      {
+        "hook": "2X Validity + 3 Months Extra😱",
+        "vertical": "REGULATORY BODIES",
+        "score": 0.875
+      }
+    ],
+    "commonCTAs": {},
+    "urgencyBreakdown": {},
+    "channelBreakdown": {
+      "Banking": 124,
+      "Regulatory Bodies": 124,
+      "Jaiib and Caiib": 124,
+      "Engineering": 124,
+      "UGC NET": 124,
+      "Punjab": 124,
+      "CA Foundaion": 31,
+      "CA Intermediate": 93,
+      "Andhra Pradesh": 62,
+      "Odisha": 62,
+      "West Bengal": 55,
+      "North East": 62,
+      "Tamil Nadu": 62,
+      "CTET": 124,
+      "Bihar": 124,
+      "SSC": 124,
+      "Agriculture": 124,
+      "Railways": 124
+    }
+  },
+  "revenueInsights": {
+    "byVertical": {},
+    "totalOrders": 0,
+    "avgRevenuePerOrder": 0
+  }
+}
