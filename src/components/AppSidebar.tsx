@@ -1,4 +1,4 @@
-import { BarChart3, FileText, LogOut, Wand2 } from "lucide-react";
+import { BarChart3, FileText, LogOut, Wand2, History } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -11,7 +11,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
   useSidebar,
   SidebarFooter,
 } from "@/components/ui/sidebar";
@@ -21,6 +20,7 @@ const menuItems = [
   { title: "Dashboard", url: "/dashboard", icon: BarChart3 },
   { title: "Generate Campaigns", url: "/generate", icon: Wand2 },
   { title: "Suggestions", url: "/suggestions", icon: FileText },
+  { title: "History", url: "/history", icon: History },
 ];
 
 export function AppSidebar() {
@@ -34,11 +34,14 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
+      <div className="flex items-center p-4 border-b border-sidebar-border">
         {!isCollapsed && (
-          <h2 className="text-lg font-semibold text-sidebar-foreground">Sandesh.ai</h2>
+          <img
+            src="/sandesh-logo-new.png"
+            alt="Sandesh.ai"
+            className="h-20 w-auto object-contain"
+          />
         )}
-        <SidebarTrigger />
       </div>
 
       <SidebarContent>

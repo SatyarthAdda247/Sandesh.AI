@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Suggestions from "./pages/Suggestions";
 import CampaignGenerator from "./pages/CampaignGenerator";
 import SandeshAIStudio from "./pages/SandeshAIStudio";
+import History from "./pages/History";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
             <Route path="/generate" element={<Layout><CampaignGenerator /></Layout>} />
             <Route path="/suggestions" element={<Layout><Suggestions /></Layout>} />
+            <Route path="/history" element={<Layout><History /></Layout>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

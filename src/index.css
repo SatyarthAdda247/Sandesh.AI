@@ -9,16 +9,20 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Light theme - Inspired by stitch_login_onboarding design */
-    --background: 210 20% 98%; /* #F9FAFB - Off-white background */
-    --foreground: 215 25% 15%; /* Dark text */
+    --background: 0 0% 100%;
+    /* #FFFFFF - Pure white to match logo */
+    --foreground: 215 25% 15%;
+    /* Dark text */
 
-    --card: 0 0% 100%; /* #FFFFFF - White cards */
+    --card: 0 0% 100%;
+    /* #FFFFFF - White cards */
     --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 215 25% 15%;
 
-    --primary: 217 91% 60%; /* #3B82F6 - Modern blue */
+    --primary: 217 91% 60%;
+    /* #3B82F6 - Modern blue */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 210 20% 96%;
@@ -30,7 +34,8 @@ All colors MUST be HSL.
     --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
 
-    --success: 145 65% 45%; /* Green for positive metrics */
+    --success: 145 65% 45%;
+    /* Green for positive metrics */
     --success-foreground: 0 0% 100%;
 
     --warning: 45 95% 55%;
@@ -39,11 +44,13 @@ All colors MUST be HSL.
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 20% 88%; /* #D1D5DB - Light gray border */
+    --border: 215 20% 88%;
+    /* #D1D5DB - Light gray border */
     --input: 215 20% 88%;
     --ring: 217 91% 60%;
 
-    --radius: 0.5rem; /* 8px - Modern rounded corners */
+    --radius: 0.5rem;
+    /* 8px - Modern rounded corners */
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 215 25% 20%;
@@ -62,37 +69,45 @@ All colors MUST be HSL.
 
   .dark {
     /* Dark theme - Inspired by stitch_login_onboarding design */
-    --background: 210 25% 10%; /* #101922 - Dark background */
-    --foreground: 0 0% 95%; /* Light text */
+    --background: 210 25% 10%;
+    /* #101922 - Dark background */
+    --foreground: 0 0% 95%;
+    /* Light text */
 
-    --card: 210 28% 15%; /* #182431 - Dark card */
+    --card: 210 28% 15%;
+    /* #182431 - Dark card */
     --card-foreground: 0 0% 95%;
 
     --popover: 210 28% 15%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 217 91% 60%; /* #3B82F6 - Same blue for consistency */
+    --primary: 217 91% 60%;
+    /* #3B82F6 - Same blue for consistency */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 210 25% 18%;
     --secondary-foreground: 0 0% 95%;
 
     --muted: 210 25% 18%;
-    --muted-foreground: 215 15% 65%; /* #92adc9 - Muted text */
+    --muted-foreground: 215 15% 65%;
+    /* #92adc9 - Muted text */
 
     --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
 
-    --success: 145 65% 50%; /* #0bda5b - Green for positive */
+    --success: 145 65% 50%;
+    /* #0bda5b - Green for positive */
     --success-foreground: 0 0% 100%;
 
     --warning: 45 95% 60%;
     --warning-foreground: 215 25% 15%;
 
-    --destructive: 0 72% 55%; /* #fa6238 - Red for negative */
+    --destructive: 0 72% 55%;
+    /* #fa6238 - Red for negative */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 25% 30%; /* #324d67 - Dark border */
+    --border: 210 25% 30%;
+    /* #324d67 - Dark border */
     --input: 210 25% 30%;
     --ring: 217 91% 60%;
 
@@ -114,9 +129,15 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    zoom: 90%;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-semibold tracking-tight;
   }
 }

@@ -616,7 +616,7 @@ export default function MoEngageDashboard() {
 
             {/* Campaign Details Dialog */}
             <Dialog open={campaignDialogOpen} onOpenChange={setCampaignDialogOpen}>
-                <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+                <DialogContent className="max-w-5xl max-h-[85vh] overflow-y-auto">
                     <DialogHeader>
                         <DialogTitle className="text-2xl">
                             {selectedCampaign?.name} - Notification Insights
@@ -624,7 +624,7 @@ export default function MoEngageDashboard() {
                     </DialogHeader>
 
                     {selectedCampaign && (
-                        <div className="space-y-6 mt-4">
+                        <div className="space-y-8 mt-6">
                             {/* Campaign Overview */}
                             <div className="grid grid-cols-2 gap-4">
                                 <Card>
@@ -661,43 +661,43 @@ export default function MoEngageDashboard() {
 
                             {/* Performance Metrics */}
                             <div>
-                                <h3 className="text-lg font-semibold mb-4">Performance Metrics</h3>
-                                <div className="grid grid-cols-4 gap-4">
+                                <h3 className="text-lg font-semibold mb-5">Performance Metrics</h3>
+                                <div className="grid grid-cols-4 gap-6">
                                     <Card className="bg-blue-50 dark:bg-blue-950 border-blue-200">
-                                        <CardContent className="pt-6">
-                                            <Send className="w-8 h-8 text-blue-600 mb-2" />
-                                            <div className="text-2xl font-bold">{formatNumber(selectedCampaign.sent)}</div>
-                                            <div className="text-sm text-muted-foreground">Total Sent</div>
+                                        <CardContent className="pt-8 pb-6">
+                                            <Send className="w-10 h-10 text-blue-600 mb-3" />
+                                            <div className="text-3xl font-bold">{formatNumber(selectedCampaign.sent)}</div>
+                                            <div className="text-sm text-muted-foreground mt-1">Total Sent</div>
                                         </CardContent>
                                     </Card>
                                     <Card className="bg-green-50 dark:bg-green-950 border-green-200">
-                                        <CardContent className="pt-6">
-                                            <Eye className="w-8 h-8 text-green-600 mb-2" />
-                                            <div className="text-2xl font-bold text-green-600">{formatNumber(selectedCampaign.opened)}</div>
-                                            <div className="text-sm text-muted-foreground">Opened</div>
-                                            <div className="text-xs text-green-600 font-medium mt-1">
+                                        <CardContent className="pt-8 pb-6">
+                                            <Eye className="w-10 h-10 text-green-600 mb-3" />
+                                            <div className="text-3xl font-bold text-green-600">{formatNumber(selectedCampaign.opened)}</div>
+                                            <div className="text-sm text-muted-foreground mt-1">Opened</div>
+                                            <div className="text-xs text-green-600 font-medium mt-2">
                                                 {((selectedCampaign.opened / selectedCampaign.sent) * 100).toFixed(1)}% rate
                                             </div>
                                         </CardContent>
                                     </Card>
                                     <Card className="bg-purple-50 dark:bg-purple-950 border-purple-200">
-                                        <CardContent className="pt-6">
-                                            <MousePointer className="w-8 h-8 text-purple-600 mb-2" />
-                                            <div className="text-2xl font-bold text-purple-600">{formatNumber(selectedCampaign.clicked)}</div>
-                                            <div className="text-sm text-muted-foreground">Clicked</div>
-                                            <div className="text-xs text-purple-600 font-medium mt-1">
+                                        <CardContent className="pt-8 pb-6">
+                                            <MousePointer className="w-10 h-10 text-purple-600 mb-3" />
+                                            <div className="text-3xl font-bold text-purple-600">{formatNumber(selectedCampaign.clicked)}</div>
+                                            <div className="text-sm text-muted-foreground mt-1">Clicked</div>
+                                            <div className="text-xs text-purple-600 font-medium mt-2">
                                                 {((selectedCampaign.clicked / selectedCampaign.opened) * 100).toFixed(1)}% CTR
                                             </div>
                                         </CardContent>
                                     </Card>
                                     <Card className="bg-orange-50 dark:bg-orange-950 border-orange-200">
-                                        <CardContent className="pt-6">
-                                            <TrendingUp className="w-8 h-8 text-orange-600 mb-2" />
-                                            <div className="text-2xl font-bold text-orange-600">
+                                        <CardContent className="pt-8 pb-6">
+                                            <TrendingUp className="w-10 h-10 text-orange-600 mb-3" />
+                                            <div className="text-3xl font-bold text-orange-600">
                                                 {((selectedCampaign.clicked / selectedCampaign.sent) * 100).toFixed(2)}%
                                             </div>
-                                            <div className="text-sm text-muted-foreground">Conversion</div>
-                                            <div className="text-xs text-muted-foreground mt-1">
+                                            <div className="text-sm text-muted-foreground mt-1">Conversion</div>
+                                            <div className="text-xs text-muted-foreground mt-2">
                                                 Click-to-Send
                                             </div>
                                         </CardContent>

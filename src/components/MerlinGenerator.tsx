@@ -26,13 +26,31 @@ const STYLES = ["Storytelling", "Direct", "Question", "Benefit-led", "Curiosity"
 const LANGUAGES = ["English", "Hindi", "Hinglish", "Marathi", "Tamil", "Digital Slang"];
 const AUDIENCES = ["Gen Z Enthusiasts", "Professionals", "Students", "Parents", "New Users", "Dormant Users"];
 const VERTICALS = [
-    "CUET PG", "SSC", "BANKING", "UPSC", "CUET Hindi", "CTET", "DEFENCE",
-    "RAILWAYS", "UTTAR_PRADESH", "BIHAR", "ENGINEERING", "RAJASTHAN",
-    "K12 & CUET UG", "JAIIB_CAIIB", "MADHYA_PRADESH", "ODISHA_STATE_EXAMS",
-    "REGULATORY_BODIES", "WEST_BENGAL", "ANDHRA_PRADESH", "HARYANA",
-    "बैंकिंग", "AGRICULTURE", "MAHARASHTRA", "Teaching", "GUJARAT",
-    "UGC_NET", "SKILL_DEVELOPMENT", "एस.एस.सी", "TAMIL_NADU", "KERALA",
-    "FCI", "UTTARAKHAND", "एसएससी", "NORTH_EAST_STATE_EXAMS", "JHARKHAND"
+    // Central Government Exams
+    "SSC", "BANKING", "UPSC", "RAILWAYS", "DEFENCE", "CTET",
+
+    // State-wise Exams
+    "UTTAR_PRADESH", "BIHAR", "RAJASTHAN", "MADHYA_PRADESH", "WEST_BENGAL",
+    "ANDHRA_PRADESH", "HARYANA", "MAHARASHTRA", "GUJARAT", "TAMIL_NADU",
+    "KERALA", "ODISHA_STATE_EXAMS", "UTTARAKHAND", "JHARKHAND", "PUNJAB",
+    "HIMACHAL_PRADESH", "CHHATTISGARH", "ASSAM", "TRIPURA", "MEGHALAYA",
+    "MANIPUR", "NAGALAND", "MIZORAM", "ARUNACHAL_PRADESH", "SIKKIM",
+    "GOA", "JAMMU_KASHMIR", "LADAKH", "DELHI", "CHANDIGARH",
+    "NORTH_EAST_STATE_EXAMS",
+
+    // Education & Teaching
+    "K12 & CUET UG", "CUET PG", "CUET Hindi", "Teaching", "UGC_NET",
+
+    // Professional & Specialized
+    "ENGINEERING", "JAIIB_CAIIB", "REGULATORY_BODIES", "AGRICULTURE",
+    "FCI", "SKILL_DEVELOPMENT", "INSURANCE", "LEGAL", "MEDICAL",
+    "PHARMACY", "NURSING", "PARAMEDICAL", "HOTEL_MANAGEMENT",
+
+    // Hindi Verticals
+    "बैंकिंग", "एस.एस.सी", "एसएससी", "रेलवे", "यूपीएससी",
+
+    // Other Categories
+    "GENERAL", "CURRENT_AFFAIRS", "COMPETITIVE_EXAMS", "GOVERNMENT_JOBS"
 ];
 
 interface GeneratedResult {
@@ -52,6 +70,8 @@ export function MerlinGenerator({ onSelect }: MerlinGeneratorProps) {
     const [usecase, setUsecase] = useState("");
     const [suggestions, setSuggestions] = useState<string[]>([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
+    const [verticalSuggestions, setVerticalSuggestions] = useState<string[]>([]);
+    const [showVerticalSuggestions, setShowVerticalSuggestions] = useState(false);
     const [trendingIdeas, setTrendingIdeas] = useState<Array<{
         vertical: string;
         hook: string;
@@ -464,11 +484,24 @@ Title: "UPSC Dream? Ab hoga Sach! 🚀"
 Message: "UPSC ki mushkil journey ab banegi aasaan! 😍 Aapka apna 'UPSC Mahapack' aa gaya hai! ✔️ Complete Prelims, Mains & Interview Prep ✔️ Live Classes, Mock Tests & Detailed Notes ✔️ Top Educators ka guidance Special Launch Offer! 🤑 ▶ Flat 75% Off ▶ Double Validity ke saath! 🎊 Ye Mauka phir nahi milega!"
 CTA: "Grab Offer Now!"
 
-Now generate a NEW push notification for:
-- Usecase: ${usecase}
-- Vertical: ${vertical || 'General'}
-- Keywords to include: ${keywords.join(', ')}
-- Avoid keywords: ${excludeKeywords.join(', ')}
+Now generate a NEW, UNIQUE push notification for:
+
+PRIMARY CAMPAIGN FOCUS:
+- Campaign Usecase: ${usecase}
+- Target Vertical: ${vertical || 'General'}
+
+HIGH-PERFORMING KEYWORDS TO INCLUDE:
+${keywords.length > 0 ? `- MUST include these keywords naturally: ${keywords.join(', ')}` : '- No specific keywords required'}
+${excludeKeywords.length > 0 ? `- AVOID these keywords: ${excludeKeywords.join(', ')}` : ''}
+
+IMPORTANT: Make this variation SIGNIFICANTLY DIFFERENT from previous ones. Use different:
+- Angles and hooks
+- Emoji combinations
+- Sentence structures
+- Benefit highlights
+- Urgency tactics
+
+Additional Parameters:
 - Target audience: ${audience}
 - Tone: ${tone}
 - Style: ${style}
@@ -503,8 +536,7 @@ Return ONLY valid JSON with this exact structure:
 {
   "headline": "Catchy title with emojis",
   "body": "Message with bullet points and line breaks using \\n",
-  "cta_text": "Action-oriented CTA phrase (NOT a coupon code)"
-}` + (generateImages ? `,\n  \"image_prompt\": \"Detailed image description for banner\"` : '') + `,\n  \"notes\": \"Any additional notes\"\n}`;
+  "cta_text": "Action-oriented CTA phrase (NOT a coupon code)"` + (generateImages ? `,\n  \"image_prompt\": \"Detailed image description for banner\"` : '') + `,\n  \"notes\": \"Any additional notes\"\n}`;
 
                                 const response = await fetch(
                                     `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
@@ -514,7 +546,7 @@ Return ONLY valid JSON with this exact structure:
                                         body: JSON.stringify({
                                             contents: [{ parts: [{ text: prompt }] }],
                                             generationConfig: {
-                                                temperature: 0.9,
+                                                temperature: 1.2,  // Increased from 0.9 for more variation
                                                 maxOutputTokens: 8192  // Increased to accommodate thinking tokens
                                             }
                                         })
@@ -861,8 +893,6 @@ Return ONLY valid JSON with this exact structure:
             {/* Left Column: Sentence Builder Form */}
             <div className="flex-1 space-y-8">
                 <div>
-                    <h2 className="text-lg font-semibold mb-4">Generate with Merlin AI</h2>
-
                     <div className="space-y-6">
                         {/* Usecase Input */}
                         <div className="space-y-2">
@@ -925,19 +955,98 @@ Return ONLY valid JSON with this exact structure:
                             </div>
                         </div>
 
-                        {/* Vertical Selector */}
+                        {/* Vertical Selector - Searchable */}
                         <div className="space-y-2">
                             <Label htmlFor="vertical" className="text-sm font-medium">
                                 For vertical / category
+                                <span className="text-xs text-muted-foreground ml-2">Type to search</span>
                             </Label>
-                            <Select value={vertical} onValueChange={setVertical}>
-                                <SelectTrigger id="vertical">
-                                    <SelectValue placeholder="Select Vertical" />
-                                </SelectTrigger>
-                                <SelectContent className="max-h-[300px]">
-                                    {VERTICALS.map(v => <SelectItem key={v} value={v}>{v}</SelectItem>)}
-                                </SelectContent>
-                            </Select>
+                            <div className="relative">
+                                <Input
+                                    id="vertical"
+                                    value={vertical}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        setVertical(value);
+                                        // Show suggestions if typing
+                                        if (value.length > 0) {
+                                            const filtered = VERTICALS.filter(v =>
+                                                v.toLowerCase().includes(value.toLowerCase())
+                                            );
+                                            setVerticalSuggestions(filtered);
+                                            setShowVerticalSuggestions(true);
+                                        } else {
+                                            setShowVerticalSuggestions(false);
+                                        }
+                                    }}
+                                    onFocus={() => {
+                                        if (vertical.length === 0) {
+                                            setVerticalSuggestions(VERTICALS);
+                                            setShowVerticalSuggestions(true);
+                                        }
+                                    }}
+                                    onBlur={() => {
+                                        setTimeout(() => setShowVerticalSuggestions(false), 200);
+                                    }}
+                                    placeholder="Type to search or select..."
+                                    className="text-base"
+                                />
+                                {vertical && (
+                                    <button
+                                        onClick={() => {
+                                            setVertical('');
+                                            setCustomVertical('');
+                                            setShowVerticalSuggestions(false);
+                                        }}
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground text-xl"
+                                    >
+                                        ✕
+                                    </button>
+                                )}
+
+                                {/* Vertical Suggestions Dropdown */}
+                                {showVerticalSuggestions && verticalSuggestions.length > 0 && (
+                                    <div className="absolute z-50 w-full mt-2 bg-background border-2 border-primary/20 rounded-lg shadow-xl max-h-80 overflow-y-auto">
+                                        {verticalSuggestions.map((v, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => {
+                                                    setVertical(v);
+                                                    setShowVerticalSuggestions(false);
+                                                }}
+                                                className="w-full text-left px-4 py-3 hover:bg-muted transition-colors border-b last:border-b-0 group"
+                                            >
+                                                <div className="font-medium text-base group-hover:text-primary transition-colors">
+                                                    {v}
+                                                </div>
+                                            </button>
+                                        ))}
+                                        <button
+                                            onClick={() => {
+                                                setVertical('CUSTOM');
+                                                setShowVerticalSuggestions(false);
+                                            }}
+                                            className="w-full text-left px-4 py-3 hover:bg-muted transition-colors border-t-2 group bg-muted/30"
+                                        >
+                                            <div className="font-medium text-base group-hover:text-primary transition-colors">
+                                                ✏️ Custom / Other
+                                            </div>
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Custom Vertical Input */}
+                            {vertical === "CUSTOM" && (
+                                <div className="mt-2">
+                                    <Input
+                                        value={customVertical}
+                                        onChange={(e) => setCustomVertical(e.target.value)}
+                                        placeholder="Enter custom vertical (e.g., INSURANCE, LEGAL, etc.)"
+                                        className="w-full"
+                                    />
+                                </div>
+                            )}
                         </div>
 
                         {/* Keywords */}
