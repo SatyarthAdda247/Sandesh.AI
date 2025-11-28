@@ -500,6 +500,9 @@ export default function MoEngageDashboard() {
                                         {
                                             id: 1,
                                             name: `${selectedVerticalDetails} Flash Sale`,
+                                            title: "🎯 Flash Sale Alert!",
+                                            description: `Exclusive ${selectedVerticalDetails} Test Series at unbeatable prices! Limited time offer - Don't miss out!`,
+                                            cta: "Grab Now!",
                                             sent: Math.floor(Math.random() * 50000) + 10000,
                                             opened: Math.floor(Math.random() * 15000) + 3000,
                                             clicked: Math.floor(Math.random() * 5000) + 500,
@@ -509,6 +512,9 @@ export default function MoEngageDashboard() {
                                         {
                                             id: 2,
                                             name: `${selectedVerticalDetails} Test Series Launch`,
+                                            title: "🚀 New Test Series Launched!",
+                                            description: `Master ${selectedVerticalDetails} with our comprehensive test series. Expert-curated questions + detailed solutions.`,
+                                            cta: "Start Practicing",
                                             sent: Math.floor(Math.random() * 50000) + 10000,
                                             opened: Math.floor(Math.random() * 15000) + 3000,
                                             clicked: Math.floor(Math.random() * 5000) + 500,
@@ -518,6 +524,9 @@ export default function MoEngageDashboard() {
                                         {
                                             id: 3,
                                             name: `${selectedVerticalDetails} Exam Reminder`,
+                                            title: "⏰ Exam in 7 Days!",
+                                            description: `Your ${selectedVerticalDetails} exam is approaching. Complete your revision with our last-minute prep materials.`,
+                                            cta: "Revise Now",
                                             sent: Math.floor(Math.random() * 50000) + 10000,
                                             opened: Math.floor(Math.random() * 15000) + 3000,
                                             clicked: Math.floor(Math.random() * 5000) + 500,
@@ -532,10 +541,12 @@ export default function MoEngageDashboard() {
                                                 setSelectedCampaign(campaign);
                                                 setCampaignDialogOpen(true);
                                             }}
-                                        >                                            <CardContent className="pt-4">
-                                                <div className="flex items-start justify-between">
-                                                    <div className="flex-1">
-                                                        <div className="flex items-center gap-2 mb-2">
+                                        >
+                                            <CardContent className="pt-4">
+                                                <div className="space-y-3">
+                                                    {/* Header with name and status */}
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex items-center gap-2">
                                                             <h4 className="font-medium">{campaign.name}</h4>
                                                             <Badge variant="secondary">{campaign.status}</Badge>
                                                         </div>
@@ -550,7 +561,18 @@ export default function MoEngageDashboard() {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="flex gap-6 text-sm">
+
+                                                    {/* Push Content */}
+                                                    <div className="border-l-4 border-primary/30 pl-4 py-2 bg-muted/30 rounded-r">
+                                                        <div className="font-semibold text-base mb-1">{campaign.title}</div>
+                                                        <div className="text-sm text-muted-foreground mb-2">{campaign.description}</div>
+                                                        <Badge variant="outline" className="text-xs">
+                                                            CTA: {campaign.cta}
+                                                        </Badge>
+                                                    </div>
+
+                                                    {/* Metrics */}
+                                                    <div className="flex gap-6 text-sm pt-2 border-t">
                                                         <div className="text-center">
                                                             <div className="font-semibold">{formatNumber(campaign.sent)}</div>
                                                             <div className="text-xs text-muted-foreground">Sent</div>

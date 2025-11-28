@@ -62,57 +62,137 @@ export function MerlinGenerator({ onSelect }: MerlinGeneratorProps) {
         description: string;
     }>>([]);
 
-    // Adda247-specific campaign suggestions based on input
+    // Get dynamic campaign suggestions based on input
     const getCampaignSuggestions = (input: string): string[] => {
+        const currentMonth = new Date().getMonth(); // 0-11
+        const currentDate = new Date().getDate();
+
         const allSuggestions = [
+            // Popular Mahapacks & Products
+            "Bank Mahapack - Complete Banking Preparation",
+            "SSC Mahapack - All SSC Exams Coverage",
+            "Railway Mahapack - Complete Railway Prep",
+            "UPSC Mahapack - Prelims + Mains + Interview",
+            "Defence Mahapack - All Defence Exams",
+            "Teaching Mahapack - CTET, DSSSB, KVS, NVS",
+            "State Exams Mahapack - All State PSC",
+            "Test Prime - Premium Test Series Access",
+            "Adda Prime - Complete Learning Platform",
+            "Live Classes Bundle - Expert-Led Sessions",
+
             // Flash Sales & Discounts
-            "Flash Sale - Limited Time Discount on Test Series",
-            "Exclusive Weekend Offer - Flat 80% Off",
-            "Early Bird Discount - New Course Launch",
-            "Mega Sale - All Courses at Lowest Price",
-            "Clearance Sale - Last Day to Enroll",
+            "Flash Sale - Limited Time Offer",
+            "Weekend Sale - Special Discount",
+            "Month End Sale - Last Chance Deals",
+            "Mega Sale - Biggest Discounts Ever",
+            "Clearance Sale - Up to 90% Off",
+            "Lightning Deal - 2 Hours Only",
+            "Hourly Flash Sale - Every Hour New Deal",
+            "Midnight Sale - Special Night Offers",
+
+            // Seasonal & Festival Sales
+            "Black Friday Sale - Massive Discounts",
+            "Cyber Monday Deals - Tech-Savvy Offers",
+            "New Year Sale - Start Fresh 2026",
+            "Republic Day Sale - 26th January Special",
+            "Independence Day Sale - 15th August Offer",
+            "Diwali Dhamaka - Festival of Lights Sale",
+            "Holi Sale - Colorful Discounts",
+            "Raksha Bandhan Offer - Sibling Special",
+            "Ganesh Chaturthi Sale - Auspicious Offers",
+            "Christmas Sale - Year-End Bonanza",
+
+            // Special Days & Events
+            "Children's Day Sale - 14th November Special",
+            "Teacher's Day Offer - 5th September Tribute",
+            "Women's Day Sale - 8th March Celebration",
+            "Youth Day Offer - Empower Your Future",
+            "Student Day Sale - Learning Made Affordable",
+            "Exam Warriors Day - Motivational Offers",
+
+            // Exam-Specific Campaigns
+            "SSC CGL Exam Alert - Registration Open",
+            "IBPS PO Notification - Apply Now",
+            "Railway RRB NTPC - Exam Date Announced",
+            "UPSC Prelims - 60 Days Left",
+            "Bank PO Mains - Final Preparation",
+            "SSC CHSL Tier 1 - Mock Test Series",
+            "CTET Exam - Registration Closing Soon",
+            "NDA Exam - Admit Card Released",
 
             // Test Series & Practice
-            "New Test Series Launch - IBPS RRB PO",
-            "Free Mock Test - SSC CGL 2024",
-            "Daily Quiz Challenge - Win Rewards",
-            "Full Length Mock Test - Banking Exams",
-            "Sectional Test Series - Quantitative Aptitude",
+            "Free Mock Test - Try Before You Buy",
+            "Full Length Test Series - Complete Package",
+            "Sectional Tests - Topic-Wise Practice",
+            "Previous Year Papers - Solve & Learn",
+            "Daily Quiz - Test Your Knowledge",
+            "Grand Mock Test - All India Rank",
+            "Speed Test Challenge - Beat the Clock",
+            "Revision Test Series - Quick Recap",
 
             // Course Launches
-            "New Course Alert - UPSC Prelims 2025",
-            "Mahapack Launch - Complete Exam Preparation",
-            "Live Classes Starting - Railway NTPC",
-            "Crash Course - Last Month Revision",
-            "Foundation Course - Banking Beginners",
+            "New Course Launch - Enroll Now",
+            "Live Classes Starting - Join Today",
+            "Crash Course Alert - Intensive Prep",
+            "Foundation Course - Build Strong Base",
+            "Advanced Course - Expert Level Training",
+            "Video Lectures - Learn Anytime",
+            "Study Material - Comprehensive Notes",
+            "E-Books Bundle - Digital Library Access",
 
-            // Exam Reminders & Updates
-            "Exam Date Announced - SSC CHSL 2024",
-            "Registration Closing Soon - IBPS PO",
-            "Admit Card Released - Check Now",
-            "Result Declared - Download Scorecard",
-            "Exam Pattern Changed - Important Update",
+            // Urgency & FOMO
+            "Last Day to Enroll - Don't Miss Out",
+            "Only 100 Seats Left - Hurry Up",
+            "Price Increasing Tomorrow - Grab Now",
+            "Limited Period Offer - Ends Tonight",
+            "Early Bird Discount - First 500 Users",
+            "Exclusive Access - Premium Members Only",
+            "Pre-Launch Offer - Special Price",
+            "Founding Member Discount - Be First",
 
-            // Engagement & Retention
-            "Complete Your Pending Course - Resume Learning",
-            "You're 80% Done - Finish Your Test Series",
-            "New Study Material Added - Check Now",
-            "Doubt Clearing Session - Join Live",
-            "Weekly Performance Report - Track Progress",
+            // Results & Achievements
+            "Results Declared - Check Your Score",
+            "Admit Card Released - Download Now",
+            "Answer Key Out - Verify Your Answers",
+            "Cutoff Marks Announced - Check Here",
+            "Success Story - Student Cleared Exam",
+            "Topper Interview - Learn from Best",
+            "Rank Predictor - Estimate Your Rank",
+
+            // Free & Trial Offers
+            "Free Trial - 7 Days Access",
+            "Free Demo Class - Experience Quality",
+            "Free Study Material - Download Now",
+            "Free Webinar - Expert Guidance",
+            "Free E-Book - Limited Time Download",
+            "Free Doubt Clearing - Ask Experts",
+            "Free Current Affairs - Monthly PDF",
 
             // Referral & Community
             "Refer & Earn - Get ₹500 per Friend",
             "Join Study Group - Connect with Peers",
-            "Success Story - Student Cracked Exam",
+            "Doubt Clearing Session - Join Live",
+            "Weekly Performance Report - Track Progress",
             "Expert Tips - Exam Preparation Strategy",
-            "Free Webinar - Career Guidance Session",
+            "Career Guidance Session - Plan Your Future",
 
-            // Seasonal & Event-based
-            "Republic Day Sale - Special Discount",
-            "New Year Offer - Start Fresh",
-            "Diwali Dhamaka - Festive Discounts",
-            "Independence Day Sale - Freedom to Learn",
-            "Back to School - Resume Preparation"
+            // Combo & Bundle Offers
+            "Combo Offer - 2 Courses at 1 Price",
+            "Bundle Deal - Save More on Multiple",
+            "Family Pack - Multiple User Discount",
+            "Group Discount - Study Together Save Together",
+            "Annual Subscription - Best Value Deal",
+            "Lifetime Access - One-Time Payment",
+
+            // Vertical-Specific
+            "Banking Special - All Bank Exams",
+            "SSC Special - CGL, CHSL, MTS, GD",
+            "Railway Special - All RRB Exams",
+            "UPSC Special - IAS, IPS, IFS Prep",
+            "Defence Special - NDA, CDS, AFCAT",
+            "Teaching Special - CTET, TET, KVS",
+            "State PSC Special - All States Coverage",
+            "Engineering Special - GATE, ESE, PSU",
         ];
 
         if (!input.trim()) return [];
@@ -125,7 +205,7 @@ export function MerlinGenerator({ onSelect }: MerlinGeneratorProps) {
                     word.length > 2 && suggestion.toLowerCase().includes(word)
                 )
             )
-            .slice(0, 5);
+            .slice(0, 8); // Show more suggestions (8 instead of 5)
     };
 
     const handleUsecaseChange = (value: string) => {
@@ -223,14 +303,34 @@ export function MerlinGenerator({ onSelect }: MerlinGeneratorProps) {
     // Language recommendations
     const getLanguageRecommendations = (): string[] => {
         return [
+            'English',
             'Hinglish (Hindi + English Mix)',
-            'Simple English',
-            'Hindi',
-            'Digital Slang & Emojis',
-            'Professional English',
-            'Youth-Oriented Language',
-            'Formal Hindi',
-            'Regional Language Mix'
+            'Hindi (Devanagari Script - हिंदी)',
+            'Hindi (Roman Script)',
+            'Tamil (Tamil Script - தமிழ்)',
+            'Tamil (Roman Script)',
+            'Telugu (Telugu Script - తెలుగు)',
+            'Telugu (Roman Script)',
+            'Kannada (Kannada Script - ಕನ್ನಡ)',
+            'Kannada (Roman Script)',
+            'Malayalam (Malayalam Script - മലയാളം)',
+            'Malayalam (Roman Script)',
+            'Marathi (Devanagari Script - मराठी)',
+            'Marathi (Roman Script)',
+            'Bengali (Bengali Script - বাংলা)',
+            'Bengali (Roman Script)',
+            'Gujarati (Gujarati Script - ગુજરાતી)',
+            'Gujarati (Roman Script)',
+            'Punjabi (Gurmukhi Script - ਪੰਜਾਬੀ)',
+            'Punjabi (Roman Script)',
+            'Odia (Odia Script - ଓଡ଼ିଆ)',
+            'Odia (Roman Script)',
+            'Assamese (Assamese Script - অসমীয়া)',
+            'Assamese (Roman Script)',
+            'Urdu (Urdu Script - اردو)',
+            'Urdu (Roman Script)',
+            'Mixed Regional (Multiple Languages)',
+            'Digital Slang & Emojis'
         ];
     };
     const [vertical, setVertical] = useState("");
@@ -254,6 +354,14 @@ export function MerlinGenerator({ onSelect }: MerlinGeneratorProps) {
     const [results, setResults] = useState<GeneratedResult[]>([]);
     const [selectedResults, setSelectedResults] = useState<number[]>([]);
     const [progress, setProgress] = useState(0);
+
+    // New campaign fields
+    const [landingPageLink, setLandingPageLink] = useState("");
+    const [pushTiming, setPushTiming] = useState("");
+    const [offers, setOffers] = useState("");
+    const [pid, setPid] = useState("");
+    const [customVertical, setCustomVertical] = useState("");
+    const [isCustomVertical, setIsCustomVertical] = useState(false);
 
     // Load trending ideas on mount
     useEffect(() => {
@@ -365,6 +473,19 @@ Now generate a NEW push notification for:
 - Tone: ${tone}
 - Style: ${style}
 - Language: ${language}
+${language.includes('Script') ? `
+  IMPORTANT LANGUAGE INSTRUCTION:
+  - You MUST write the ENTIRE notification in ${language}
+  - Use the native script (${language.match(/\((.*?)\)/)?.[1] || language}) for ALL text
+  - Do NOT mix with English or Roman script unless specified as "Roman Script"
+  - Examples: If Tamil (Tamil Script), write "தமிழில் எழுதுங்கள்", NOT "Tamil la ezhuthungal"
+  - If Hindi (Devanagari), write "हिंदी में लिखें", NOT "Hindi mein likhein"
+` : language.includes('Hinglish') ? `
+  IMPORTANT LANGUAGE INSTRUCTION:
+  - Mix Hindi and English naturally (Hinglish style)
+  - Use Roman script for Hindi words (e.g., "aapka", "bahut", "sath")
+  - Example: "Aapka exam prep ab hoga easy! 🎯"
+` : ''}
 - Personalization: ${personalization}
 ${coupon ? `- Promo Code (include in message): ${coupon}` : ''}
 - Include emojis: ${includeEmoji ? 'Yes' : 'No'}
@@ -521,8 +642,8 @@ Return ONLY valid JSON with this exact structure:
             return;
         }
 
-        // CSV Headers matching Test_Prime_Push_Automation
-        const headers = ["id", "link", "title", "image_link", "Message", "Message Summary", "Message title", "CTA"];
+        // CSV Headers matching Test_Prime_Push_Automation + new fields
+        const headers = ["id", "link", "title", "image_link", "Message", "Message Summary", "Message title", "CTA", "landing_page_link", "push_timing", "offers", "pid"];
 
         // Escape quotes and commas for CSV
         const escapeCSV = (str: string) => {
@@ -538,11 +659,12 @@ Return ONLY valid JSON with this exact structure:
             headers.join(","),
             ...selected.map((r, index) => {
                 // Generate ID: {VERTICAL}{counter} (e.g., "BANKING1", "SSC2")
-                const verticalId = vertical.toUpperCase().replace(/\s+/g, '_').replace(/[^A-Z0-9_]/g, '');
+                const actualVertical = customVertical || vertical;
+                const verticalId = actualVertical.toUpperCase().replace(/\s+/g, '_').replace(/[^A-Z0-9_]/g, '');
                 const rowId = `${verticalId}${index + 1}`;
 
-                // Link will be auto-fetched from Google Sheet based on vertical
-                const link = "https://www.adda247.com/testprime/79075/TEST-PRIME"; // Default fallback
+                // Link - use landing page if provided, otherwise default
+                const link = landingPageLink || "https://www.adda247.com/testprime/79075/TEST-PRIME";
 
                 // Title and image_link are placeholders as per sample
                 const title = "title";
@@ -568,7 +690,11 @@ Return ONLY valid JSON with this exact structure:
                     escapeCSV(message),
                     messageSummary,
                     escapeCSV(messageTitle),
-                    escapeCSV(cta)
+                    escapeCSV(cta),
+                    escapeCSV(landingPageLink),
+                    escapeCSV(pushTiming),
+                    escapeCSV(offers),
+                    escapeCSV(pid)
                 ].join(",");
             })
         ].join("\n");
@@ -593,16 +719,21 @@ Return ONLY valid JSON with this exact structure:
 
         setPushing(true);
         try {
-            // Prepare campaigns for Google Sheets in Test Prime format
+            // Prepare campaigns for Google Sheets in Test Prime format + new fields
+            const actualVertical = customVertical || vertical;
             const campaigns = selected.map((r, index) => ({
-                id: `${vertical || 'GENERAL'}${index + 1}`,
-                link: 'https://www.adda247.com/testprime/79075/TEST-PRIME',
+                id: `${actualVertical || 'GENERAL'}${index + 1}`,
+                link: landingPageLink || 'https://www.adda247.com/testprime/79075/TEST-PRIME',
                 title: 'title',
                 image_link: r.image_prompt || 'image_link',
                 Message: r.body || r.message || '',
                 'Message Summary': usecase || 'Campaign',
                 'Message title': r.headline || r.message?.substring(0, 50) || '',
-                CTA: r.cta_text || (coupon ? `Use Code: ${coupon}` : 'Use Code: TPFLASH')
+                CTA: r.cta_text || (coupon ? `Use Code: ${coupon}` : 'Use Code: TPFLASH'),
+                landing_page_link: landingPageLink,
+                push_timing: pushTiming,
+                offers: offers,
+                pid: pid
             }));
 
             // Use Google Apps Script Web App as webhook (simpler than OAuth)
@@ -935,6 +1066,50 @@ Return ONLY valid JSON with this exact structure:
                                 onChange={(e) => setCoupon(e.target.value)}
                                 className="w-[150px]"
                                 placeholder="Coupon Code"
+                            />
+                        </div>
+
+                        {/* Offers Field */}
+                        <div className="flex flex-wrap items-center gap-3">
+                            <span>with offers</span>
+                            <Input
+                                value={offers}
+                                onChange={(e) => setOffers(e.target.value)}
+                                className="w-[250px]"
+                                placeholder="e.g., Flat 80% Off, Double Validity"
+                            />
+                        </div>
+
+                        {/* Landing Page Link */}
+                        <div className="space-y-2">
+                            <Label className="text-sm font-medium">Landing Page Link</Label>
+                            <Input
+                                value={landingPageLink}
+                                onChange={(e) => setLandingPageLink(e.target.value)}
+                                className="w-full"
+                                placeholder="https://www.adda247.com/..."
+                            />
+                        </div>
+
+                        {/* Push Timing */}
+                        <div className="space-y-2">
+                            <Label className="text-sm font-medium">Push Timing (Optional)</Label>
+                            <Input
+                                type="datetime-local"
+                                value={pushTiming}
+                                onChange={(e) => setPushTiming(e.target.value)}
+                                className="w-full"
+                            />
+                        </div>
+
+                        {/* PID (Product ID) */}
+                        <div className="space-y-2">
+                            <Label className="text-sm font-medium">PID (Product ID)</Label>
+                            <Input
+                                value={pid}
+                                onChange={(e) => setPid(e.target.value)}
+                                className="w-full"
+                                placeholder="e.g., 79075, TESTPRIME2024"
                             />
                         </div>
 
