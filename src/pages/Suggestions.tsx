@@ -294,15 +294,23 @@ export default function Suggestions() {
           onClick={async () => {
             setRefreshing(true);
             try {
-              const response = await fetch('http://localhost:8787/edtech-events');
+              // Use environment variable or fallback to localhost for development
+              const apiUrl = import.meta.env.VITE_EDTECH_EVENTS_URL || 'http://localhost:8787/edtech-events';
+              const response = await fetch(apiUrl);
+
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+
               const data = await response.json();
               setUpcomingEvents(data.events);
               toast.success(`Refreshed! Found ${data.events.length} upcoming events`);
               // Optionally show a preview of events
               const topEvents = data.events.slice(0, 3).map((e: any) => `${e.emoji} ${e.title}`).join(', ');
               toast.info(`Upcoming: ${topEvents}...`);
-            } catch (error) {
-              toast.error('Failed to refresh events. Make sure the Python service is running.');
+            } catch (error: any) {
+              console.error('Failed to refresh events:', error);
+              toast.error('Events service unavailable. This feature requires the Python backend service.');
               setUpcomingEvents([]);
             } finally {
               setRefreshing(false);

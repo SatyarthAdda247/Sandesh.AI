@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, CheckCircle, Clock } from "lucide-react";
 
-interface TrendingIdea {
+interface PopularIdea {
     vertical: string;
     hook: string;
     channel: string;
@@ -13,12 +13,12 @@ interface TrendingIdea {
     description: string;
 }
 
-interface TrendingSuggestionsProps {
-    ideas: TrendingIdea[];
-    onSelectIdea: (idea: TrendingIdea) => void;
+interface PopularIdeasProps {
+    ideas: PopularIdea[];
+    onSelectIdea: (idea: PopularIdea) => void;
 }
 
-export function TrendingSuggestions({ ideas, onSelectIdea }: TrendingSuggestionsProps) {
+export function PopularIdeas({ ideas, onSelectIdea }: PopularIdeasProps) {
     const getUrgencyColor = (urgency: string) => {
         switch (urgency) {
             case 'High': return 'bg-red-500';
@@ -34,14 +34,14 @@ export function TrendingSuggestions({ ideas, onSelectIdea }: TrendingSuggestions
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <TrendingUp className="h-5 w-5 text-primary" />
-                        <CardTitle className="text-lg">Today's Trending Ideas</CardTitle>
+                        <CardTitle className="text-lg">Today's Popular Ideas</CardTitle>
                     </div>
                     <Badge variant="outline" className="text-xs">
                         {ideas.length} suggestions
                     </Badge>
                 </div>
                 <p className="text-sm text-muted-foreground mt-1">
-                    Popular ongoing trends for campaign generation
+                    Popular ongoing campaigns for generation
                 </p>
             </CardHeader>
             <CardContent className="space-y-3">

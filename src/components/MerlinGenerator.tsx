@@ -10,8 +10,8 @@ import { Slider } from "@/components/ui/slider";
 import { RefreshCw, Sparkles, X, Image as ImageIcon, Copy, Check, Download, Loader2, Save, Send } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { TrendingSuggestions } from "@/components/TrendingSuggestions";
-import { getTrendingIdeas } from "@/data/trending-ideas";
+import { PopularIdeas } from "@/components/PopularIdeas";
+import { getPopularIdeas } from "@/data/popular-ideas";
 
 interface MerlinGeneratorProps {
     onSelect?: (campaign: any) => void;
@@ -383,9 +383,9 @@ export function MerlinGenerator({ onSelect }: MerlinGeneratorProps) {
     const [customVertical, setCustomVertical] = useState("");
     const [isCustomVertical, setIsCustomVertical] = useState(false);
 
-    // Load trending ideas on mount
+    // Load popular ideas on mount
     useEffect(() => {
-        const ideas = getTrendingIdeas();
+        const ideas = getPopularIdeas();
         setTrendingIdeas(ideas);
     }, []);
 

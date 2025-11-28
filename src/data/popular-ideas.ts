@@ -1,7 +1,7 @@
-// Trending campaign ideas data
+// Popular campaign ideas data
 // These are popular ongoing trends for exam preparation campaigns
 
-export const TRENDING_IDEAS = [
+export const POPULAR_IDEAS = [
     {
         vertical: 'Banking',
         hook: 'Big exam update just dropped!',
@@ -76,12 +76,12 @@ export const TRENDING_IDEAS = [
     }
 ];
 
-export function getTrendingIdeas() {
-    return TRENDING_IDEAS;
+export function getPopularIdeas() {
+    return POPULAR_IDEAS;
 }
 
-export function getTrendingIdeasByVertical(vertical: string) {
-    return TRENDING_IDEAS.filter(idea =>
+export function getPopularIdeasByVertical(vertical: string) {
+    return POPULAR_IDEAS.filter(idea =>
         idea.vertical.toLowerCase() === vertical.toLowerCase()
     );
 }
