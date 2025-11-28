@@ -28,6 +28,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { MerlinGenerator } from "@/components/MerlinGenerator";
+import CampaignHistory from "@/components/CampaignHistory";
 
 const VERTICALS = [
   "CUET PG", "SSC", "BANKING", "UPSC", "CUET Hindi", "CTET", "DEFENCE",
@@ -117,7 +119,7 @@ const TONALITIES = [
 ];
 
 export default function CampaignGenerator() {
-  const [activeTab, setActiveTab] = useState<"single" | "bulk">("single");
+  const [activeTab, setActiveTab] = useState<'merlin' | 'history'>('merlin');
   const [campaignType, setCampaignType] = useState("Revenue");
   const [vertical, setVertical] = useState("");
   const [language, setLanguage] = useState("Hinglish");
@@ -911,11 +913,19 @@ export default function CampaignGenerator() {
         </p>
       </div>
 
-      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "single" | "bulk")} className="space-y-6">
+      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "merlin" | "history")} className="space-y-6">
         <TabsList>
-          <TabsTrigger value="single">Single Campaign</TabsTrigger>
-          <TabsTrigger value="bulk">Bulk Campaigns</TabsTrigger>
+          <TabsTrigger value="merlin">Merlin AI</TabsTrigger>
+          <TabsTrigger value="history">History</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="merlin" className="space-y-6">
+          <MerlinGenerator />
+        </TabsContent>
+
+        <TabsContent value="history" className="space-y-6">
+          <CampaignHistory />
+        </TabsContent>
 
         <TabsContent value="single" className="space-y-6">
           <div className="grid gap-6 lg:grid-cols-2">

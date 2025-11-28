@@ -1,7 +1,70 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { corsHeaders } from "../_shared/cors.ts"
 
-const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY') || 'YOUR_GEMINI_API_KEY';
+const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY');
+const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') || 'placeholder_for_future_use';
+
+// Helper function to generate with Gemini
+async function generateWithGemini(prompt: string) {
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: 0.8,
+          topK: 40,
+          topP: 0.9,
+          maxOutputTokens: 800
+        }
+      })
+    }
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Gemini API failed (${response.status}): ${errorText}`);
+  }
+
+  return await response.json();
+}
+
+// Helper function to generate with GPT-4o-mini (fallback)
+async function generateWithGPT(prompt: string) {
+  if (!OPENAI_API_KEY || OPENAI_API_KEY === 'placeholder_for_future_use') {
+    throw new Error('OpenAI API key not configured');
+  }
+
+  const response = await fetch(
+    'https://api.openai.com/v1/chat/completions',
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: 'You are a marketing campaign generator. Always respond with valid JSON.' },
+          { role: 'user', content: prompt }
+        ],
+        temperature: 0.8,
+        max_tokens: 800,
+        response_format: { type: "json_object" }
+      })
+    }
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`OpenAI API failed (${response.status}): ${errorText}`);
+  }
+
+  return await response.json();
+}
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -152,56 +215,75 @@ Make it highly creative and conversion-focused!`
       userPrompt += `\n\nVARIATION ${variationIndex + 1}: Make it UNIQUE from previous ones.`
     }
 
-    // --- GEMINI API CALL ---
+    // --- GEMINI API CALL WITH GPT-4o-mini FALLBACK ---
     const fullPrompt = `${systemPrompt}\n\nUSER REQUEST:\n${userPrompt}`
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{ text: fullPrompt }]
-        }],
-        generationConfig: {
-          temperature: 0.8,
-          topK: 40,
-          topP: 0.9,
-          maxOutputTokens: 800,
-          responseMimeType: "application/json"
-        }
-      })
-    })
+    let apiResponse;
+    let modelUsed = 'gemini-2.5-flash';
 
-    const data = await response.json()
-
-    if (!response.ok) {
-      throw new Error(data.error?.message || 'Gemini API Error')
+    try {
+      console.log('Attempting Gemini 2.5 Flash...');
+      apiResponse = await generateWithGemini(fullPrompt);
+      console.log('✅ Gemini 2.5 Flash succeeded');
+    } catch (geminiError) {
+      console.error('❌ Gemini failed, attempting GPT-4o-mini fallback:', geminiError);
+      try {
+        apiResponse = await generateWithGPT(fullPrompt);
+        modelUsed = 'gpt-4o-mini';
+        console.log('✅ GPT-4o-mini fallback succeeded');
+      } catch (gptError) {
+        console.error('❌ Both models failed:', gptError);
+        return new Response(
+          JSON.stringify({ error: 'All generation models failed. Please try again later.' }),
+          { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
     }
 
-    const rawMessage = data.candidates[0].content.parts[0].text
+    // Parse response based on model used
+    let textContent = '';
+    if (modelUsed === 'gemini-2.5-flash') {
+      console.log('Gemini API Response:', JSON.stringify(apiResponse, null, 2));
+      textContent = apiResponse?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      console.log('Extracted text content:', textContent);
+    } else {
+      // GPT-4o-mini response
+      textContent = apiResponse?.choices?.[0]?.message?.content || '';
+    }
+
+    if (!textContent) {
+      console.error('Empty textContent! Full API response:', JSON.stringify(apiResponse, null, 2));
+      throw new Error('No content received from API.');
+    }
+
+    const rawMessage = textContent;
+
+    // Strip markdown code blocks if present (Gemini 2.5 Flash sometimes wraps JSON in ```json...```)
+    let cleanedMessage = rawMessage.trim();
+    if (cleanedMessage.startsWith('```json')) {
+      cleanedMessage = cleanedMessage.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+    } else if (cleanedMessage.startsWith('```')) {
+      cleanedMessage = cleanedMessage.replace(/^```\s*/, '').replace(/\s*```$/, '');
+    }
 
     // Parse JSON
-    let parsed = {}
+    let parsed: any = {}
     try {
-      const cleanJson = rawMessage.replace(/```json/g, "").replace(/```/g, "").trim()
-      parsed = JSON.parse(cleanJson)
+      parsed = JSON.parse(cleanedMessage)
     } catch (e) {
-      console.error("JSON Parse Error", e)
-      parsed = { message: rawMessage } // Fallback
-    }
-
-    // Ensure image prompt exists
-    if (!parsed.image_prompt) {
-      parsed.image_prompt = `Professional educational banner for ${vertical} exam preparation. Red and white theme. Text: '${vertical} Exam'.`
-      if (parsed.notes) parsed.notes += ` [Image Prompt: ${parsed.image_prompt}]`
-      else parsed.notes = `[Image Prompt: ${parsed.image_prompt}]`
+      console.error('JSON parse error:', e, 'Raw:', cleanedMessage)
+      parsed = { message: cleanedMessage } // Fallback
     }
 
     return new Response(
-      JSON.stringify(parsed),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      JSON.stringify({
+        message: parsed.components?.[0]?.hook || rawMessage,
+        components: parsed.components || [],
+        image_prompt: parsed.image_prompt || `Professional educational banner for ${vertical} exam preparation. Red and white theme. Text: '${vertical} Exam'.`,
+        notes: parsed.notes || '',
+        modelUsed: modelUsed // Include which model was used
+      }),
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     )
 
   } catch (error) {

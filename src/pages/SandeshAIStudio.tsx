@@ -60,6 +60,8 @@ const SandeshAIStudio = () => {
     const [campaignType, setCampaignType] = useState('push');
     const [vertical, setVertical] = useState('E-COMMERCE');
     const [tonality, setTonality] = useState('urgent');
+    const [language, setLanguage] = useState('English');
+    const [audience, setAudience] = useState('All Users');
     const [context, setContext] = useState('');
     const [variationCount, setVariationCount] = useState(3);
     const [isGenerating, setIsGenerating] = useState(false);
@@ -84,6 +86,8 @@ const SandeshAIStudio = () => {
                         campaignType,
                         vertical,
                         tonality,
+                        language,
+                        audience,
                         trendContext: { title: context },
                         variationIndex: i
                     }

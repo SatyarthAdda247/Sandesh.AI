@@ -272,31 +272,56 @@ def _get_upcoming_edtech_events() -> List[EdTechEvent]:
     today = datetime.utcnow().date()
     events: List[EdTechEvent] = []
     
-    # Exam dates (2025 calendar - key competitive exams)
+    # Exam dates (2026 calendar - key competitive exams)
     exam_dates = [
-        ("SSC CGL Tier-2", "2025-02-15", ["SSC", "GOVT JOBS"], ["fomo", "serious"]),
-        ("UPSC Prelims 2025", "2025-05-25", ["UPSC"], ["fomo", "motivational"]),
-        ("Banking PO Mains", "2025-03-10", ["BANKING"], ["fomo", "premium"]),
-        ("Railway NTPC CBT-2", "2025-04-20", ["RAILWAYS"], ["fomo", "friendly"]),
-        ("CTET July 2025", "2025-07-20", ["CTET", "Teaching"], ["serious", "friendly"]),
-        ("CUET UG 2025", "2025-05-15", ["CUET UG", "K12 & CUET UG"], ["fomo", "celebratory"]),
-        ("CUET PG 2025", "2025-03-18", ["CUET PG"], ["fomo", "serious"]),
-        ("SSC CHSL Tier-2", "2025-05-05", ["SSC"], ["fomo", "friendly"]),
-        ("Defence NDA-1", "2025-04-18", ["DEFENCE"], ["motivational", "premium"]),
-        ("UGC NET June 2025", "2025-06-15", ["UGC_NET"], ["serious", "premium"]),
+        ("SSC CGL Tier-2 Results", "2025-12-15", ["SSC", "GOVT JOBS"], ["fomo", "serious"]),
+        ("UPSC Prelims 2026 Notification", "2026-01-10", ["UPSC"], ["fomo", "motivational"]),
+        ("Banking PO Prelims", "2026-01-20", ["BANKING"], ["fomo", "premium"]),
+        ("SSC CHSL Answer Key Release", "2025-12-20", ["SSC"], ["fomo", "friendly"]),
+        ("Railway NTPC Result Declaration", "2026-01-05", ["RAILWAYS"], ["fomo", "friendly"]),
+        ("CTET January 2026 Registration", "2025-12-10", ["CTET", "Teaching"], ["serious", "friendly"]),
+        ("CUET UG 2026 Application Start", "2026-02-01", ["CUET UG", "K12 & CUET UG"], ["fomo", "celebratory"]),
+        ("UPSC Mains 2025 Results", "2025-12-28", ["UPSC"], ["fomo", "serious"]),
+        ("SSC CGL 2026 Notification", "2026-01-15", ["SSC"], ["fomo", "friendly"]),
+        ("Defence NDA-1 2026 Admit Card", "2026-01-25", ["DEFENCE"], ["motivational", "premium"]),
+        ("UGC NET December 2025 Results", "2025-12-18", ["UGC_NET"], ["serious", "premium"]),
+        ("Banking IBPS PO Interview Dates", "2026-01-12", ["BANKING"], ["fomo", "premium"]),
+        ("SSC MTS 2026 Notification Expected", "2026-02-05", ["SSC"], ["fomo", "friendly"]),
+        ("UPSC CSE 2026 Calendar Release", "2026-01-08", ["UPSC"], ["motivational", "serious"]),
+        ("Railway Group D Result", "2025-12-22", ["RAILWAYS"], ["fomo", "friendly"]),
     ]
     
     for title, date_str, verticals, tonalities in exam_dates:
         event_date = datetime.strptime(date_str, "%Y-%m-%d").date()
         days_until = (event_date - today).days
         if 0 <= days_until <= 90:
+            # Determine emoji based on event type
+            emoji = "📢" if "Notification" in title or "Registration" in title else \
+                    "📊" if "Results" in title or "Answer Key" in title else \
+                    "🎫" if "Admit Card" in title else \
+                    "📅" if "Calendar" in title or "Dates" in title else "📝"
+            
+            # Create specific descriptions
+            if "Results" in title or "Answer Key" in title:
+                description = f"{title} - Students anxiously waiting. High engagement opportunity."
+                relevance = f"Peak engagement period! Students checking results multiple times. Perfect for result analysis courses, next exam prep, and congratulatory campaigns."
+            elif "Notification" in title or "Registration" in title:
+                description = f"{title} - Application window opening. Create urgency campaigns."
+                relevance = f"Application rush period! Target aspirants with form filling guides, eligibility checkers, and early bird course offers."
+            elif "Admit Card" in title:
+                description = f"{title} - Exam approaching. Last-minute prep campaigns."
+                relevance = f"Final preparation phase! Promote quick revision courses, mock tests, and exam day tips."
+            else:
+                description = f"{title} - Important exam update for aspirants."
+                relevance = f"Key milestone for {', '.join(verticals[:2])} aspirants. Ideal timing for targeted campaigns."
+            
             events.append(EdTechEvent(
                 title=title,
                 date=date_str,
                 category="exam",
-                emoji="📝",
-                description=f"{title} exam scheduled. Perfect timing for last-minute prep campaigns.",
-                relevance=f"High engagement window {days_until} days before exam. Target aspirants with revision packs, mock tests, and quick tips.",
+                emoji=emoji,
+                description=description,
+                relevance=relevance,
                 suggested_tonality=tonalities,
                 verticals=verticals,
                 days_until=days_until,

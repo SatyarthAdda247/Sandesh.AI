@@ -22,7 +22,7 @@ const App = () => (
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <AuthProvider>
           <Routes>
-            <Route path="/" element={<SandeshAIStudio />} />
+            <Route path="/" element={<Layout><CampaignGenerator /></Layout>} />
             <Route path="/sandesh-studio" element={<SandeshAIStudio />} />
             <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
             <Route path="/generate" element={<Layout><CampaignGenerator /></Layout>} />

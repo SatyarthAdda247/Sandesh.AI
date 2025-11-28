@@ -24,7 +24,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Edit, Send, Check, Trash2, Clock, Tag, Code, Users, ShieldCheck, StickyNote, TrendingUp } from "lucide-react";
+import { Edit, Send, Check, Trash2, Clock, Tag, Code, Users, ShieldCheck, StickyNote, TrendingUp, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import {
   AlertDialog,
@@ -92,21 +92,13 @@ export default function Suggestions() {
     cta: "",
     link: "",
   });
-  const [generateOpen, setGenerateOpen] = useState(false);
-  const [generateForm, setGenerateForm] = useState({
-    vertical_id: "",
-    hook: "",
-    push_copy: "",
-    cta: "",
-    link: "",
-    channel: "push",
-    urgency: "Medium",
-  });
   const [proofNotes, setProofNotes] = useState<Record<string, string>>({});
   const { user } = useAuth();
+  const [refreshing, setRefreshing] = useState(false);
+  const [upcomingEvents, setUpcomingEvents] = useState<any[]>([]);
 
   useEffect(() => {
-    Promise.all([loadSuggestions(), loadVerticals()]).finally(() => {});
+    Promise.all([loadSuggestions(), loadVerticals()]).finally(() => { });
   }, []);
 
   const loadVerticals = async () => {
@@ -114,10 +106,6 @@ export default function Suggestions() {
       const { data, error } = await supabase.from("verticals").select("*");
       if (error) throw error;
       setVerticals(data || []);
-      // Preselect first if available
-      if ((data || []).length > 0) {
-        setGenerateForm((f) => ({ ...f, vertical_id: data![0].id }));
-      }
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -257,7 +245,7 @@ export default function Suggestions() {
 
   const handleDelete = async () => {
     if (!deletingId) return;
-    
+
     try {
       const { error } = await supabase
         .from("suggestions")
@@ -274,41 +262,7 @@ export default function Suggestions() {
     }
   };
 
-  const handleGenerate = async () => {
-    try {
-      if (!generateForm.vertical_id) {
-        toast.error("Please select a vertical");
-        return;
-      }
-      const today = new Date().toISOString().split("T")[0];
-      const score = Math.round((Math.random() * 0.5 + 0.5) * 1000) / 1000;
-      const { error } = await supabase
-        .from("suggestions")
-        .insert([
-          {
-            suggestion_date: today,
-            vertical_id: generateForm.vertical_id,
-            hook: generateForm.hook || "New offer tailored for your prep!",
-            push_copy:
-              generateForm.push_copy ||
-              "Boost your score with our curated practice set and expert tips.",
-            cta: generateForm.cta || "Check Now",
-            channel: generateForm.channel,
-            urgency: generateForm.urgency,
-            link: generateForm.link || null,
-            score,
-            status: "pending",
-          },
-        ] as any);
-      if (error) throw error;
-      toast.success("Comms generated");
-      setGenerateOpen(false);
-      setGenerateForm((f) => ({ ...f, hook: "", push_copy: "", cta: "", link: "" }));
-      loadSuggestions();
-    } catch (error: any) {
-      toast.error(error.message);
-    }
-  };
+
 
   const getUrgencyColor = (urgency: string) => {
     switch (urgency.toLowerCase()) {
@@ -334,164 +288,101 @@ export default function Suggestions() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Suggestions</h1>
-          <p className="text-muted-foreground mt-2">Review and publish push notifications</p>
+          <p className="text-muted-foreground mt-2">Review and publish push notifications based on real events</p>
         </div>
-        <Button onClick={() => setGenerateOpen(true)}>Generate Comms</Button>
+        <Button
+          onClick={async () => {
+            setRefreshing(true);
+            try {
+              const response = await fetch('http://localhost:8787/edtech-events');
+              const data = await response.json();
+              setUpcomingEvents(data.events);
+              toast.success(`Refreshed! Found ${data.events.length} upcoming events`);
+              // Optionally show a preview of events
+              const topEvents = data.events.slice(0, 3).map((e: any) => `${e.emoji} ${e.title}`).join(', ');
+              toast.info(`Upcoming: ${topEvents}...`);
+            } catch (error) {
+              toast.error('Failed to refresh events. Make sure the Python service is running.');
+              setUpcomingEvents([]);
+            } finally {
+              setRefreshing(false);
+            }
+          }}
+          disabled={refreshing}
+        >
+          <RefreshCw className={`h-4 w-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
+          Refresh Events
+        </Button>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Today's Suggestions</CardTitle>
-          <CardDescription>
-            {suggestions.length} suggestions generated for today
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {suggestions.length > 0 ? (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Vertical</TableHead>
-                  <TableHead>Hook</TableHead>
-                  <TableHead>Channel</TableHead>
-                  <TableHead>Urgency</TableHead>
-                  <TableHead>Score</TableHead>
-                  <TableHead>Proof</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {suggestions.map((suggestion) => (
-                  <TableRow key={suggestion.id}>
-                    <TableCell className="font-medium">
+      {/* Upcoming Events Section */}
+      {upcomingEvents.length > 0 && (
+        <Card className="border-primary/20">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-primary" />
+                <CardTitle>Popular & Exam Events</CardTitle>
+              </div>
+              <Badge variant="outline">{upcomingEvents.length} events</Badge>
+            </div>
+            <CardDescription>
+              Real exam announcements, result dates, and trending events for campaigns
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {upcomingEvents.slice(0, 12).map((event, index) => (
+                <div
+                  key={index}
+                  className="p-4 rounded-lg border bg-card hover:bg-accent/50 transition-all"
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-start justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <Badge variant="outline">{suggestion.verticals?.name}</Badge>
-                      </div>
-                    </TableCell>
-                    <TableCell className="max-w-xs">
-                      <div className="space-y-1">
-                        <div className="font-medium truncate">{suggestion.hook}</div>
-                        <div className="text-xs text-muted-foreground flex items-center gap-2 flex-wrap">
-                          {suggestion.promo_code && (
-                            <span className="flex items-center gap-1">
-                              <Tag className="h-3 w-3" />
-                              Code: {suggestion.promo_code}
-                            </span>
-                          )}
-                          {suggestion.discount && (
-                            <span className="flex items-center gap-1">
-                              <Badge variant="secondary" className="h-5">{suggestion.discount}% Off</Badge>
-                            </span>
-                          )}
-                          {suggestion.scheduled_time && (
-                            <span className="flex items-center gap-1">
-                              <Clock className="h-3 w-3" />
-                              {suggestion.scheduled_time}
-                            </span>
-                          )}
+                        <span className="text-2xl">{event.emoji}</span>
+                        <div>
+                          <h4 className="font-semibold text-sm">{event.title}</h4>
+                          <p className="text-xs text-muted-foreground">
+                            {new Date(event.date).toLocaleDateString('en-IN', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric'
+                            })}
+                          </p>
                         </div>
                       </div>
-                    </TableCell>
-                    <TableCell>{suggestion.channel}</TableCell>
-                    <TableCell>
-                      <Badge variant={getUrgencyColor(suggestion.urgency)}>
-                        {suggestion.urgency}
+                      <Badge variant="secondary" className="text-xs">
+                        {event.days_until}d
                       </Badge>
-                    </TableCell>
-                    <TableCell>{suggestion.score.toFixed(2)}</TableCell>
-                    <TableCell>
-                      <Select
-                        value={suggestion.proof_state || "unreviewed"}
-                        onValueChange={(value) => handleProofStateChange(suggestion.id, value)}
-                      >
-                        <SelectTrigger className="h-8 text-xs">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {PROOF_STATES.map((state) => (
-                            <SelectItem key={state.value} value={state.value}>
-                              {state.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      {suggestion.proof_owner && (
-                        <p className="text-[11px] text-muted-foreground mt-1">
-                          {suggestion.proof_owner}
-                        </p>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      <Badge
-                        variant={
-                          suggestion.status === "published"
-                            ? "default"
-                            : suggestion.status === "approved"
-                            ? "secondary"
-                            : "outline"
-                        }
-                      >
-                        {suggestion.status}
+                    </div>
+                    <p className="text-xs text-muted-foreground line-clamp-2">
+                      {event.relevance}
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs">
+                        {event.category}
                       </Badge>
-                    </TableCell>
-                    <TableCell className="text-right space-x-1">
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={() => setViewDetailsId(suggestion.id)}
-                        title="View Details"
-                      >
-                        <Code className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={() => handleEdit(suggestion)}
-                        title="Edit"
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      {suggestion.status === "pending" && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => handleApprove(suggestion.id)}
-                        >
-                          <Check className="h-4 w-4 mr-1" />
-                          Approve
-                        </Button>
-                      )}
-                      {suggestion.status === "approved" && (
-                        <Button
-                          size="sm"
-                          onClick={() => handlePublish(suggestion.id)}
-                        >
-                          <Send className="h-4 w-4 mr-1" />
-                          Publish
-                        </Button>
-                      )}
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={() => setDeletingId(suggestion.id)}
-                        title="Delete"
-                        className="text-destructive hover:text-destructive"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          ) : (
-            <p className="text-center text-muted-foreground py-12">
-              No suggestions available. Generate suggestions from the dashboard.
-            </p>
-          )}
-        </CardContent>
-      </Card>
+                      {event.verticals.slice(0, 2).map((vertical: string, i: number) => (
+                        <Badge key={i} variant="outline" className="text-xs">
+                          {vertical}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {upcomingEvents.length > 12 && (
+              <p className="text-center text-sm text-muted-foreground mt-4">
+                Showing 12 of {upcomingEvents.length} events
+              </p>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+
 
       {/* Edit Dialog */}
       <Dialog open={!!editingId} onOpenChange={() => setEditingId(null)}>
@@ -544,116 +435,7 @@ export default function Suggestions() {
         </DialogContent>
       </Dialog>
 
-      {/* Generate Comms Dialog */}
-      <Dialog open={generateOpen} onOpenChange={setGenerateOpen}>
-        <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Generate Comms</DialogTitle>
-            <DialogDescription>Create a new suggestion for the selected vertical</DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4 py-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Vertical</Label>
-                <Select
-                  value={generateForm.vertical_id}
-                  onValueChange={(v) => setGenerateForm((f) => ({ ...f, vertical_id: v }))}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select vertical" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {verticals.map((v) => (
-                      <SelectItem key={v.id} value={v.id}>
-                        {v.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label>Channel</Label>
-                <Select
-                  value={generateForm.channel}
-                  onValueChange={(v) => setGenerateForm((f) => ({ ...f, channel: v }))}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select channel" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="push">Push</SelectItem>
-                    <SelectItem value="email">Email</SelectItem>
-                    <SelectItem value="sms">SMS</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Label>Urgency</Label>
-              <Select
-                value={generateForm.urgency}
-                onValueChange={(v) => setGenerateForm((f) => ({ ...f, urgency: v }))}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select urgency" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="High">High</SelectItem>
-                  <SelectItem value="Medium">Medium</SelectItem>
-                  <SelectItem value="Low">Low</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="gen-hook">Hook</Label>
-              <Input
-                id="gen-hook"
-                value={generateForm.hook}
-                onChange={(e) => setGenerateForm((f) => ({ ...f, hook: e.target.value }))}
-                placeholder="Short attention-grabbing line"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="gen-copy">Push Copy</Label>
-              <Textarea
-                id="gen-copy"
-                value={generateForm.push_copy}
-                onChange={(e) =>
-                  setGenerateForm((f) => ({ ...f, push_copy: e.target.value }))
-                }
-                rows={4}
-                placeholder="Body text for the notification"
-              />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="gen-cta">CTA</Label>
-                <Input
-                  id="gen-cta"
-                  value={generateForm.cta}
-                  onChange={(e) => setGenerateForm((f) => ({ ...f, cta: e.target.value }))}
-                  placeholder="Button label e.g. Buy Now"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="gen-link">Link</Label>
-                <Input
-                  id="gen-link"
-                  value={generateForm.link}
-                  onChange={(e) => setGenerateForm((f) => ({ ...f, link: e.target.value }))}
-                  placeholder="https://example.com"
-                />
-              </div>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setGenerateOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={handleGenerate}>Generate</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+
 
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={!!deletingId} onOpenChange={() => setDeletingId(null)}>
@@ -683,7 +465,7 @@ export default function Suggestions() {
           {viewDetailsId && (() => {
             const suggestion = suggestions.find(s => s.id === viewDetailsId);
             if (!suggestion) return null;
-            
+
             return (
               <div className="space-y-6 py-4">
                 {/* Main Content */}
@@ -890,9 +672,9 @@ export default function Suggestions() {
                 {suggestion.link && (
                   <div className="border-t pt-4 space-y-2">
                     <Label className="text-sm font-semibold">Link</Label>
-                    <a 
-                      href={suggestion.link} 
-                      target="_blank" 
+                    <a
+                      href={suggestion.link}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm text-blue-600 hover:underline break-all"
                     >
